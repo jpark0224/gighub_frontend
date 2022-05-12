@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Routes, Route, Link } from "react-router-dom";
-import Register from "./components/Register";
-import Login from "./components/Login";
+import Register from "./components/users/Register";
+import Login from "./components/users/Login";
+import Home from "./components/Home";
+import NavBar from "./components/NavBar";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { API_URL } from "./config";
 
 function App() {
+  const [accessToken, setAccessToken] = useState(localStorage.access);
+
   return (
     <>
+      <NavBar accessToken={accessToken} setAccessToken={setAccessToken} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
@@ -15,15 +22,5 @@ function App() {
     </>
   );
 }
-
-const Home = () => {
-  return (
-    <>
-      <h1>App</h1>
-      <Link to="/register">Register</Link>
-      <Link to="/login">Login</Link>
-    </>
-  );
-};
 
 export default App;

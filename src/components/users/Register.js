@@ -1,14 +1,18 @@
 import { useState } from "react";
-import "../App.css";
+import "../../App.css";
 import axios from "axios";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { API_URL } from "../../config";
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = useState({});
   const [userCreated, setUserCreated] = useState(null);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
   const [displaynameErrorMessage, setDisplaynameErrorMessage] = useState(null);
   const [emailErrorMessage, setEmailErrorMessage] = useState(null);
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState(null);
+
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setFormData({
@@ -21,19 +25,22 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:8000/users/register",
-        formData
-      );
+      const res = await axios.post(`${API_URL}/users/register`, formData);
       console.log(res);
       if (res.status === 201) {
         setUserCreated(true);
+        setDisplaynameErrorMessage(null);
+        setUsernameErrorMessage(null);
+        setEmailErrorMessage(null);
+        setPasswordErrorMessage(null);
+        navigate("/users/login");
       }
     } catch (e) {
       setUserCreated(false);
       setDisplaynameErrorMessage(e.response.data.display_name);
       setUsernameErrorMessage(e.response.data.username);
       setEmailErrorMessage(e.response.data.email);
+      setPasswordErrorMessage(e.response.data.password);
     }
   };
 
@@ -69,6 +76,7 @@ const Login = () => {
           name="password_repeat"
           onChange={onChange}
         />
+        {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
         <input
           type="email"
           placeholder="Email"
@@ -83,17 +91,10 @@ const Login = () => {
           value=""
           onChange={onChange}
         />
-        <input
-          type="radio"
-          name="is_artist"
-          value="False"
-          onChange={onChange}
-        />
-        <label htmlFor="is_artist"> is_artist </label>
         <button type="submit">Register</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
