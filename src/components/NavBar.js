@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav, NavDropdown, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../config.js";
 
@@ -9,6 +9,8 @@ import { API_URL } from "../config.js";
 function NavBar({ accessToken, setAccessToken }) {
   // const [storageToken,updateStorageToken] = useState(localStorage.token)
   const [groupData, setGroupData] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // GET request using axios inside useEffect React hook
@@ -29,10 +31,15 @@ function NavBar({ accessToken, setAccessToken }) {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                {groupData.map((element, i) => (
-                  <NavDropdown.Item key={element.name}>
-                    {element.name}
+              <NavDropdown title="Bands" id="basic-nav-dropdown">
+                {groupData.map((group) => (
+                  <NavDropdown.Item
+                    key={group.name}
+                    onClick={() => {
+                      navigate(`/groups/${group.id}`);
+                    }}
+                  >
+                    {group.name}
                   </NavDropdown.Item>
                 ))}
               </NavDropdown>
@@ -41,24 +48,15 @@ function NavBar({ accessToken, setAccessToken }) {
             <Nav>
               {accessToken ? (
                 <>
-                  <NavDropdown title="Profile">
-                    <NavDropdown.Item
-                      onClick={() => {
-                        // navigate("/users/myprofile/changePassword");
-                      }}
-                    >
-                      Change Password
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item
-                      onClick={() => {
-                        localStorage.removeItem("access");
-                        setAccessToken(localStorage.access);
-                      }}
-                    >
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                  <Button
+                    onClick={() => {
+                      localStorage.removeItem("access");
+                      setAccessToken(localStorage.access);
+                    }}
+                    variant="outline-dark"
+                  >
+                    Log Out
+                  </Button>
                 </>
               ) : (
                 <>

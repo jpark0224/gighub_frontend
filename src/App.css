@@ -1,3 +1,8 @@
+body {
+  font-family: 'Raleway',
+  sans-serif;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +40,99 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.bandCardsContainer {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.bandProfilePicture {
+    border-radius: 50%;
+    height: 300px;
+    width: 300px;
+}
+
+.createPost, .post {
+      padding: 19px;
+      border: 1px solid rgb(235, 235, 235);
+      border-radius: 8px;
+      width: 32vw;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+}
+
+.createPostProfilePicture {
+      border-radius: 50%;
+      height: 30px;
+      width: 30px;
+}
+
+.createPostForm, .commentForm{
+  width: 25vw;
+}
+
+.groupLeftContainer {
+  display: flex;
+  width: fit-content;
+  margin-top: 5vh;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bandName {
+  margin: 3vh 0;
+}
+
+.groupFeedContainer {
+    margin-top: 5vh;
+}
+
+.post {
+  display: flex;
+ justify-content: left;
+}
+
+.createPostContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+form {
+  align-items: baseline;
+}
+
+.form-control {
+  width: 30vw;
+}
+
+.buttonContainer {
+  display: flex;
+  align-items: flex-end;
+}
+
+a, .card-title {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.likeIcon {
+  width: 25px;
+  height: auto;
+}
+
+.cardImage {
+  width: 10rem;
+  height: 15rem;
+}
+
+footer {
+ height: 10vh;
 }

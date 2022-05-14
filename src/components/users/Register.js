@@ -3,6 +3,7 @@ import "../../App.css";
 import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
+import { Form, Button } from "react-bootstrap";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -49,50 +50,74 @@ const Register = () => {
       <h1>Register</h1>
       {userCreated && <div>User Created</div>}
       {userCreated === false && <div>User registration unsuccessful</div>}
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          onChange={onChange}
-        />
-        {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
-        <input
-          type="text"
-          placeholder="Display name"
-          name="display_name"
-          onChange={onChange}
-        />
-        {displaynameErrorMessage && <div>{displaynameErrorMessage}</div>}
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={onChange}
-        />
-        <input
-          type="password"
-          placeholder="Repeat Password"
-          name="password_repeat"
-          onChange={onChange}
-        />
-        {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={onChange}
-        />
-        {emailErrorMessage && <div>{emailErrorMessage}</div>}
-        <input
-          type="url"
-          placeholder="Profile picture"
-          name="profile_picture"
-          value=""
-          onChange={onChange}
-        />
-        <button type="submit">Register</button>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={onChange}
+          />
+          {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Display name</Form.Label>
+
+          <Form.Control
+            type="text"
+            placeholder="Display name"
+            name="display_name"
+            onChange={onChange}
+          />
+          {displaynameErrorMessage && <div>{displaynameErrorMessage}</div>}
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password</Form.Label>
+
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={onChange}
+          />
+          <Form.Control
+            type="password"
+            placeholder="Repeat Password"
+            name="password_repeat"
+            onChange={onChange}
+          />
+          {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={onChange}
+          />
+          {emailErrorMessage && <div>{emailErrorMessage}</div>}
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Profile picture</Form.Label>
+
+          <Form.Control
+            type="url"
+            placeholder="Profile picture"
+            name="profile_picture"
+            value=""
+            onChange={onChange}
+          />
+        </Form.Group>
+
+        <Button type="submit" variant="outline-dark">
+          Register
+        </Button>
+      </Form>
     </div>
   );
 };

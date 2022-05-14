@@ -3,6 +3,7 @@ import "../../App.css";
 import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
+import { Form, Button } from "react-bootstrap";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -34,7 +35,7 @@ const Login = () => {
         setAccessToken(res.data.access);
         setRefreshToken(res.data.refresh);
         setUserLoggedIn(true);
-        // navigate("/");
+        navigate("/");
       }
     } catch (e) {
       console.log(e);
@@ -55,23 +56,35 @@ const Login = () => {
       {userLoggedIn === false && (
         <div>No account found with the given credentials.</div>
       )}
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          onChange={onChange}
-        />
-        {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={onChange}
-        />
-        {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
-        <button type="submit">Login</button>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className="mb-3">
+          <Form.Label>Username</Form.Label>
+
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={onChange}
+          />
+          {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <Form.Label>Password</Form.Label>
+
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={onChange}
+          />
+          {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
+        </Form.Group>
+
+        <Button type="submit" variant="outline-dark">
+          Log in
+        </Button>
+      </Form>
     </div>
   );
 };
