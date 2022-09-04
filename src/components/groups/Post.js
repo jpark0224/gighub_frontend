@@ -1,15 +1,23 @@
 import "../../App.css";
 import { Link } from "react-router-dom";
-import { Stack, Form } from "react-bootstrap";
+import { Stack, Form, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config.js";
 import moment from "moment";
+import CommentForm from "./CommentForm.js";
 import Comment from "./Comment.js";
 
-const Post = ({ created_by, created_at, contents, picture, id }) => {
+const Post = ({
+  created_by,
+  created_at,
+  contents,
+  picture,
+  id,
+  comments_on_post,
+}) => {
   const [likeImage, setLikeImage] = useState(
     "https://www.svgrepo.com/show/220662/like.svg"
   );
@@ -33,41 +41,44 @@ const Post = ({ created_by, created_at, contents, picture, id }) => {
     }
   }
 
+  console.log(comments_on_post);
+
   return (
     <>
       <div className="post">
         <Stack>
           <div className="postInfo">
-            <Stack direction="horizontal" gap={3}>
+            <Stack direction="horizontal" gap={2}>
               <img
                 src="https://images.nightcafe.studio//assets/profile.png?tr=w-640,c-at_max"
                 alt="user_profile_picture"
                 className="createPostProfilePicture"
               />
-              <div>{created_by}</div>
+              <div className="postDisplayName">{created_by.display_name}</div>
             </Stack>
-            <Form.Text className="text-muted">
-              {convertTime(created_at)}
-            </Form.Text>
+            <div className="created_at">{convertTime(created_at)}</div>
           </div>
-          <hr />
           <div className="postContents">
             <p>{picture}</p>
             <p>{contents}</p>
           </div>
-          <hr />
-
-          <div className="likes">
+          <div className="likesContainer">
             <img
               className="likeIcon"
               src={likeImage}
               onClick={changeImage}
             ></img>
           </div>
-          <hr />
-          <div className="commentForm">
-            <Comment id={id} />
+          <div>
+            {comments_on_post.map((comment) => (
+              <Comment key={comment.id} {...comment} />
+            ))}
           </div>
+          <Container className="commentFormContainer">
+            <div className="commentForm">
+              <CommentForm id={id} />
+            </div>
+          </Container>
         </Stack>
       </div>
     </>

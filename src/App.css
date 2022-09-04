@@ -1,6 +1,5 @@
 body {
-  font-family: 'Raleway',
-  sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .App {
@@ -51,30 +50,36 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.bandProfilePicture {
-    border-radius: 50%;
-    height: 300px;
-    width: 300px;
+.bandProfilePicture,
+.spinnerContainer {
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.createPost, .post {
-      padding: 19px;
-      border: 1px solid rgb(235, 235, 235);
-      border-radius: 8px;
-      width: 32vw;
-      margin-top: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+.createPost,
+.post {
+  padding: 19px;
+  border: 1px solid rgb(235, 235, 235);
+  border-radius: 8px;
+  width: 32vw;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .createPostProfilePicture {
-      border-radius: 50%;
-      height: 30px;
-      width: 30px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
 }
 
-.createPostForm, .commentForm{
+.createPostForm,
+.commentForm {
   width: 25vw;
 }
 
@@ -91,18 +96,18 @@ body {
 }
 
 .groupFeedContainer {
-    margin-top: 5vh;
+  margin-top: 5vh;
 }
 
 .post {
   display: flex;
- justify-content: left;
+  justify-content: left;
 }
 
 .createPostContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 form {
@@ -118,13 +123,22 @@ form {
   align-items: flex-end;
 }
 
-a, .card-title {
-  color: inherit;
-  text-decoration: inherit;
+a,
+.card-title {
+  color: inherit !important;
+  text-decoration: inherit !important;
+}
+
+.likesContainer {
+  color: rgb(135, 142, 150);
+  padding: 12px 0px;
+  display: flex;
+  border-top: 1px solid rgb(235, 235, 235);
+  border-bottom: 1px solid rgb(235, 235, 235);
 }
 
 .likeIcon {
-  width: 25px;
+  width: 23px;
   height: auto;
 }
 
@@ -134,5 +148,69 @@ a, .card-title {
 }
 
 footer {
- height: 10vh;
+  height: 10vh;
+}
+
+.comment {
+  position: relative;
+  padding: 6px 12px;
+  background-color: rgb(245, 247, 250);
+  color: rgb(52, 58, 64);
+  font-size: 13px;
+  line-height: 1.54;
+  border-radius: 0px 12px 12px;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.created_at {
+  white-space: nowrap;
+  font-size: 12px;
+  color: rgb(173, 177, 184);
+}
+
+.createCommentProfilePicture {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+}
+
+.singleCommentContainer {
+  padding: 12px 0px;
+}
+
+.commentDisplayName,
+.postDisplayName {
+  font-weight: bold;
+}
+
+.dot::before {
+  content: "·";
+  margin: 0px 5px;
+  color: rgb(173, 177, 184);
+}
+
+.replyButton {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 0px;
+}
+
+.commentLikeIcon {
+  width: 15px;
+  height: auto;
+}
+
+.commentFormContainer {
+  padding-top: 20px;
+}
+
+.spinner {
+  width: 30px;
+  display: flex;
 }

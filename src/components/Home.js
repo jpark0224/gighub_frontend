@@ -30,7 +30,9 @@ const Home = () => {
                   src={`${group.profile_picture}`}
                 />
                 <Card.Body>
-                  <Card.Title>{group.name}</Card.Title>
+                  <Card.Title className="cardGroupName">
+                    {group.name}
+                  </Card.Title>
                 </Card.Body>
               </Card>
             </Link>

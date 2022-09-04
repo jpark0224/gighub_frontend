@@ -1,113 +1,67 @@
 import "../../App.css";
 import { Link } from "react-router-dom";
-import {
-  Card,
-  Row,
-  Col,
-  Container,
-  Form,
-  Button,
-  Stack,
-} from "react-bootstrap";
+import { Stack, Form, Container } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../config.js";
-import Post from "./Post.js";
-import jwt_decode from "jwt-decode";
+import moment from "moment";
 
-const Comment = ({ id }) => {
-  // posts
-  const [postData, setPostData] = useState([]);
+const Comment = ({ contents, created_by, created_at, liked_user }) => {
+  const [likeImage, setLikeImage] = useState(
+    "https://www.svgrepo.com/show/220662/like.svg"
+  );
+  const [likeClicked, setLikeClicked] = useState(false);
 
-  useEffect(() => {
-    // GET request using axios inside useEffect React hook
-    axios.get(`${API_URL}/posts/`).then((res) => setPostData(res.data));
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
+  function convertTime(created_at) {
+    var str = created_at;
+    var date = moment(str);
+    var dateComponent = date.utc().format("YYYY-MM-DD");
+    var timeComponent = date.utc().format("HH:mm:ss");
+    return `${dateComponent} ${timeComponent}`;
+  }
 
-  // create a post
-  const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  // const [accessToken, setAccessToken] = useState(localStorage.access);
-
-  const navigate = useNavigate();
-
-  const onChange = (e) => {
-    setFormData({
-      ...formData,
-      post: {
-        id: `${id}`,
-      },
-      [e.target.name]: e.target.value,
-    });
-    console.log({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    // let tokenData = localStorage.acesss;
-    // setAccessToken(tokenData);
-
-    console.log(localStorage.access);
-
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${localStorage.access}`,
-    };
-
-    console.log(headers);
-
-    try {
-      const res = await axios.post(`${API_URL}/comments/`, formData, {
-        headers: headers,
-      });
-      console.log(res);
-      if (res.status === 201) {
-        // update posts data
-        setPostData(postData);
-      }
-    } catch (e) {
-      if (e.response.status === 403) {
-        setErrorMessage("Please log in to comment.");
-      }
-      console.log(e);
+  function changeImage() {
+    if (likeClicked == false) {
+      setLikeClicked(true);
+      setLikeImage("https://www.svgrepo.com/show/221146/like.svg");
+    } else {
+      setLikeClicked(false);
+      setLikeImage("https://www.svgrepo.com/show/220662/like.svg");
     }
-  };
+  }
 
   return (
     <>
-      {errorMessage && <div>{errorMessage}</div>}
-      <Form className="commentForm" onSubmit={onSubmit}>
-        <Stack direction="horizontal" gap={3}>
-          <Form.Group
-            className="md-3 createPostForm"
-            controlId="exampleForm.ControlTextarea1"
-          >
-            <Stack direction="horizontal" gap={3}>
-              <Form.Label>
-                <img
-                  src="https://images.nightcafe.studio//assets/profile.png?tr=w-640,c-at_max"
-                  alt="user_profile_picture"
-                  className="createPostProfilePicture"
-                />
-              </Form.Label>
-              <Form.Control
-                placeholder="Leave a comment"
-                as="textarea"
-                rows={1}
-                onChange={onChange}
-                name="contents"
-              />
+      <Container className="singleCommentContainer">
+        <Stack direction="vertical" gap={1}>
+          <Stack direction="horizontal" gap={2}>
+            <img
+              src="https://images.nightcafe.studio//assets/profile.png?tr=w-640,c-at_max"
+              alt="user_profile_picture"
+              className="createCommentProfilePicture"
+            />
+            <Stack direction="horizontal" gap={2} className="comment">
+              <div className="commentDisplayName">
+                {created_by.display_name}
+              </div>
+              {/* {created_by.profile_picture} */}
+              {contents}
+              {/* {liked_user} */}
             </Stack>
-          </Form.Group>
-          <Button variant="outline-dark" type="submit">
-            Submit
-          </Button>
+          </Stack>
+          <Stack direction="horizontal">
+            <img
+              className="commentLikeIcon"
+              src={likeImage}
+              onClick={changeImage}
+            ></img>
+            <button className="replyButton dot">Reply</button>
+            <div className="created_at dot">{convertTime(created_at)}</div>
+          </Stack>
         </Stack>
-      </Form>
+      </Container>
     </>
   );
 };

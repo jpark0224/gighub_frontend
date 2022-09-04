@@ -20,13 +20,11 @@ const Group = () => {
     axios
       .get(`${API_URL}/groups/${groupID}`)
       .then((res) => setGroupData(res.data));
-    console.log(groupData);
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
+  }, [groupID]);
 
   return (
     <>
-      <Container classNmae="feedContainer">
+      <Container className="feedContainer">
         <Row>
           <Col md="auto" className="groupLeftColumn">
             <GroupLeft {...groupData} />
