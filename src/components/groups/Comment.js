@@ -52,12 +52,27 @@ const Comment = ({ contents, created_by, created_at, liked_user }) => {
             </Stack>
           </Stack>
           <Stack direction="horizontal">
-            <img
-              className="commentLikeIcon"
-              src={likeImage}
-              onClick={changeImage}
-            ></img>
-            <button className="replyButton dot">Reply</button>
+            <div className="commentsLikeContainer">
+              <img
+                alt="commentLikeButton"
+                className="commentLikeIcon"
+                src={likeImage}
+                onClick={changeImage}
+              ></img>
+              {liked_user.length !== 0 ? <p>{liked_user.length}</p> : <p></p>}
+            </div>
+            <button className="replyButton dot">
+              <img
+                alt="commentCommentButton"
+                className="commentCommentIcon"
+                src="https://img.icons8.com/ios/100/000000/comments.png"
+              />
+              {/* {comments_on_post.length !== 0 ? (
+                <p>{comments_on_post.length}</p>
+              ) : (
+                <p></p>
+              )} */}
+            </button>
             <div className="created_at dot">{convertTime(created_at)}</div>
           </Stack>
         </Stack>

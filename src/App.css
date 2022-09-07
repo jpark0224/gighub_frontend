@@ -129,15 +129,28 @@ a,
   text-decoration: inherit !important;
 }
 
-.likesContainer {
-  color: rgb(135, 142, 150);
+.likesCommentsContainer {
   padding: 12px 0px;
   display: flex;
   border-top: 1px solid rgb(235, 235, 235);
   border-bottom: 1px solid rgb(235, 235, 235);
 }
 
-.likeIcon {
+.likesCommentsContainer p {
+  margin: auto 21px auto 7px;
+}
+
+.commentsLikeContainer {
+  display: flex;
+}
+
+.commentsLikeContainer p {
+  margin: auto auto auto 7px;
+  font-size: 13px;
+}
+
+.likeIcon,
+.commentIcon {
   width: 23px;
   height: auto;
 }
@@ -202,8 +215,11 @@ footer {
 }
 
 .commentLikeIcon {
-  width: 15px;
-  height: auto;
+  height: 17px;
+}
+
+.commentCommentIcon {
+  height: 19px;
 }
 
 .commentFormContainer {

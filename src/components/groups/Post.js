@@ -17,6 +17,7 @@ const Post = ({
   picture,
   id,
   comments_on_post,
+  liked_user,
 }) => {
   const [likeImage, setLikeImage] = useState(
     "https://www.svgrepo.com/show/220662/like.svg"
@@ -32,7 +33,7 @@ const Post = ({
   }
 
   function changeImage() {
-    if (likeClicked == false) {
+    if (likeClicked === false) {
       setLikeClicked(true);
       setLikeImage("https://www.svgrepo.com/show/221146/like.svg");
     } else {
@@ -40,8 +41,6 @@ const Post = ({
       setLikeImage("https://www.svgrepo.com/show/220662/like.svg");
     }
   }
-
-  console.log(comments_on_post);
 
   return (
     <>
@@ -62,12 +61,24 @@ const Post = ({
             <p>{picture}</p>
             <p>{contents}</p>
           </div>
-          <div className="likesContainer">
+          <div className="likesCommentsContainer">
             <img
+              alt="likeButton"
               className="likeIcon"
               src={likeImage}
               onClick={changeImage}
             ></img>
+            {liked_user.length !== 0 ? <p>{liked_user.length}</p> : <p></p>}
+            <img
+              alt="commentButton"
+              className="commentIcon"
+              src="https://img.icons8.com/ios/100/000000/comments.png"
+            />
+            {comments_on_post.length !== 0 ? (
+              <p>{comments_on_post.length}</p>
+            ) : (
+              <p></p>
+            )}
           </div>
           <div>
             {comments_on_post.map((comment) => (
