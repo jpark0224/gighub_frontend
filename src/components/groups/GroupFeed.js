@@ -30,13 +30,17 @@ const GroupFeed = ({ name, id }) => {
 
   useEffect(() => {
     // GET request using axios inside useEffect React hook
-    loadPostData(); // empty dependency array means this effect will only run once (like componentDidMount in classes)
-  }, []);
+    loadPostData();
+  }, [id]);
 
   const loadPostData = async () => {
-    axios
-      .get(`${API_URL}/posts/?group=${id}`)
-      .then((res) => setPostData(res.data));
+    if (id) {
+      axios
+        .get(`${API_URL}/posts/?group=${id}`)
+        .then((res) => setPostData(res.data));
+    } else {
+      setPostData([]);
+    }
   };
 
   const onChange = (e) => {
@@ -127,9 +131,9 @@ const GroupFeed = ({ name, id }) => {
 
       {/* posts */}
       <Container className="postsContainer">
-        {postData.map((post) =>
-          post.group.name === name ? <Post key={post.id} {...post} /> : []
-        )}
+        {postData.map((post) => (
+          <Post key={post.id} {...post} />
+        ))}
       </Container>
     </Container>
   );
