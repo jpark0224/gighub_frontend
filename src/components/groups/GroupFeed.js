@@ -17,7 +17,7 @@ import { API_URL } from "../../config.js";
 import Post from "./Post.js";
 import jwt_decode from "jwt-decode";
 
-const GroupFeed = ({ name }) => {
+const GroupFeed = ({ name, id }) => {
   // posts
   const [postData, setPostData] = useState([]);
 
@@ -34,7 +34,9 @@ const GroupFeed = ({ name }) => {
   }, []);
 
   const loadPostData = async () => {
-    axios.get(`${API_URL}/posts/`).then((res) => setPostData(res.data));
+    axios
+      .get(`${API_URL}/posts/?group=${id}`)
+      .then((res) => setPostData(res.data));
   };
 
   const onChange = (e) => {
@@ -73,6 +75,7 @@ const GroupFeed = ({ name }) => {
       // update posts data
       // }
       loadPostData();
+      console.log(postData.slice(0).reverse());
     } catch (e) {
       if (e.response.status === 403) {
         setErrorMessage("Please log in to post.");
@@ -124,12 +127,9 @@ const GroupFeed = ({ name }) => {
 
       {/* posts */}
       <Container className="postsContainer">
-        {postData
-          .slice(0)
-          .reverse()
-          .flatMap((post) =>
-            post.group.name === name ? <Post key={post.id} {...post} /> : []
-          )}
+        {postData.map((post) =>
+          post.group.name === name ? <Post key={post.id} {...post} /> : []
+        )}
       </Container>
     </Container>
   );
