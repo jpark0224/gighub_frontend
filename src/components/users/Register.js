@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "../../App.css";
+import "../../styles/Register.css";
 import axios from "axios";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -46,79 +47,83 @@ const Register = () => {
   };
 
   return (
-    <div className="App">
-      <h1>Register</h1>
+    <Container fluid className="registerContainer">
       {userCreated && <div>User Created</div>}
       {userCreated === false && <div>User registration unsuccessful</div>}
-      <Form onSubmit={onSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={onChange}
-          />
-          {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Display name</Form.Label>
+      <Row className="registerRow ">
+        <Col className="registerLeft">Left</Col>
+        <Col>
+          <Form onSubmit={onSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Username"
+                name="username"
+                onChange={onChange}
+              />
+              {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Display name</Form.Label>
 
-          <Form.Control
-            type="text"
-            placeholder="Display name"
-            name="display_name"
-            onChange={onChange}
-          />
-          {displaynameErrorMessage && <div>{displaynameErrorMessage}</div>}
-        </Form.Group>
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Display name"
+                name="display_name"
+                onChange={onChange}
+              />
+              {displaynameErrorMessage && <div>{displaynameErrorMessage}</div>}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
 
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={onChange}
-          />
-          <Form.Control
-            type="password"
-            placeholder="Repeat Password"
-            name="password_repeat"
-            onChange={onChange}
-          />
-          {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
-        </Form.Group>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={onChange}
+              />
+              <Form.Control
+                type="password"
+                placeholder="Repeat Password"
+                name="password_repeat"
+                onChange={onChange}
+              />
+              {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
+            </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Email</Form.Label>
 
-          <Form.Control
-            type="email"
-            placeholder="Email"
-            name="email"
-            onChange={onChange}
-          />
-          {emailErrorMessage && <div>{emailErrorMessage}</div>}
-        </Form.Group>
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={onChange}
+              />
+              {emailErrorMessage && <div>{emailErrorMessage}</div>}
+            </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Profile picture</Form.Label>
+            <Form.Group className="mb-3">
+              <Form.Label>Profile picture</Form.Label>
 
-          <Form.Control
-            type="url"
-            placeholder="Profile picture"
-            name="profile_picture"
-            value=""
-            onChange={onChange}
-          />
-        </Form.Group>
+              <Form.Control
+                type="url"
+                placeholder="Profile picture"
+                name="profile_picture"
+                value=""
+                onChange={onChange}
+              />
+            </Form.Group>
 
-        <Button type="submit" variant="outline-dark">
-          Register
-        </Button>
-      </Form>
-    </div>
+            <Button type="submit" variant="outline-dark">
+              Register
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
