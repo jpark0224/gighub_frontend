@@ -54,9 +54,10 @@ const Register = () => {
         <Col className="registerLeft">Left</Col>
         <Col>
           <Form onSubmit={onSubmit}>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 formGroup">
               <Form.Label>Username</Form.Label>
-              <Form.Control
+              <input
+                className="formControl"
                 type="text"
                 placeholder="Username"
                 name="username"
@@ -64,10 +65,11 @@ const Register = () => {
               />
               {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 formGroup">
               <Form.Label>Display name</Form.Label>
 
-              <Form.Control
+              <input
+                className="formControl"
                 type="text"
                 placeholder="Display name"
                 name="display_name"
@@ -75,28 +77,31 @@ const Register = () => {
               />
               {displaynameErrorMessage && <div>{displaynameErrorMessage}</div>}
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 formGroup">
               <Form.Label>Password</Form.Label>
 
-              <Form.Control
+              <input
+                className="formControl passwordForm"
                 type="password"
-                placeholder="Password"
+                placeholder="********"
                 name="password"
                 onChange={onChange}
               />
-              <Form.Control
+              <input
+                className="formControl"
                 type="password"
-                placeholder="Repeat Password"
+                placeholder="********"
                 name="password_repeat"
                 onChange={onChange}
               />
               {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 formGroup">
               <Form.Label>Email</Form.Label>
 
-              <Form.Control
+              <input
+                className="formControl"
                 type="email"
                 placeholder="Email"
                 name="email"
@@ -105,10 +110,11 @@ const Register = () => {
               {emailErrorMessage && <div>{emailErrorMessage}</div>}
             </Form.Group>
 
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3 formGroup">
               <Form.Label>Profile picture</Form.Label>
 
-              <Form.Control
+              <input
+                className="formControl"
                 type="url"
                 placeholder="Profile picture"
                 name="profile_picture"
@@ -117,9 +123,14 @@ const Register = () => {
               />
             </Form.Group>
 
-            <Button type="submit" variant="outline-dark">
-              Register
-            </Button>
+            <div className="formButtonContainer">
+              <Button type="submit" variant="outline-dark">
+                Register
+              </Button>
+              <a className="signInLink" href="/login">
+                I am already a member
+              </a>
+            </div>
           </Form>
         </Col>
       </Row>
