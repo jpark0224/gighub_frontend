@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "../../App.css";
+import "../../styles/Register.css";
 import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Container } from "react-bootstrap";
 
 const Login = () => {
   const [formData, setFormData] = useState({});
@@ -50,42 +51,55 @@ const Login = () => {
   };
 
   return (
-    <div className="App">
-      <h1>Login</h1>
-      {userLoggedIn && <div>User login successful</div>}
-      {userLoggedIn === false && (
-        <div>No account found with the given credentials.</div>
-      )}
-      <Form onSubmit={onSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Username</Form.Label>
+    <Container fluid className="registerContainer">
+      <section className="loginFormContainer">
+        <section className="loginMessage">
+          {userLoggedIn && <div>User login successful</div>}
+          {userLoggedIn === false && (
+            <div>No account found with the given credentials.</div>
+          )}
+        </section>
+        <Form onSubmit={onSubmit}>
+          <Form.Group className="mb-3">
+            <Form.Label>Username</Form.Label>
 
-          <Form.Control
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={onChange}
-          />
-          {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
-        </Form.Group>
+            <input
+              className="formControl"
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={onChange}
+            />
+            {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
 
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={onChange}
-          />
-          {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
-        </Form.Group>
+            <input
+              className="formControl"
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={onChange}
+            />
+            {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
+          </Form.Group>
 
-        <Button type="submit" variant="outline-dark">
-          Log in
-        </Button>
-      </Form>
-    </div>
+          <div className="formButtonContainer">
+            <Button type="submit" variant="outline-dark">
+              Log in
+            </Button>
+            <div className="signInLinkContainer">
+              <p>Not a member?</p>
+              <a className="signInLink" href="/register">
+                Sign Up
+              </a>
+            </div>
+          </div>
+        </Form>
+      </section>
+    </Container>
   );
 };
 
