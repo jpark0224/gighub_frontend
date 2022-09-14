@@ -19,6 +19,8 @@ function NavBar({ accessToken, setAccessToken }) {
     // empty dependency array means this effect will only run once (like componentDidMount in classes)
   }, []);
 
+  useEffect(() => console.log("navbar rerendered"), [accessToken]);
+
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">

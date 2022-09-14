@@ -11,6 +11,7 @@ import { API_URL } from "./config";
 
 function App() {
   const [accessToken, setAccessToken] = useState(localStorage.access);
+  const [refreshToken, setRefreshToken] = useState(localStorage.refresh);
 
   return (
     <>
@@ -18,7 +19,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={
+            <Login
+              accessToken={accessToken}
+              refreshToken={refreshToken}
+              setAccessToken={setAccessToken}
+              setRefreshToken={setRefreshToken}
+            />
+          }
+        />
         <Route path="/groups/:groupID" element={<Group />} />
       </Routes>
     </>

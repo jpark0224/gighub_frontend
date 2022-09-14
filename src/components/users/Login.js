@@ -6,13 +6,11 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 import { Form, Button, Container } from "react-bootstrap";
 
-const Login = () => {
+const Login = ({ accessToken, setAccessToken, setRefreshToken }) => {
   const [formData, setFormData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(null);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
-  const [refreshToken, setRefreshToken] = useState(null);
 
   const navigate = useNavigate();
 
@@ -54,7 +52,7 @@ const Login = () => {
     <Container fluid className="registerContainer">
       <section className="loginFormContainer">
         <section className="loginMessage">
-          {userLoggedIn && <div>User login successful</div>}
+          {accessToken && <div>User login successful</div>}
           {userLoggedIn === false && (
             <div>No account found with the given credentials.</div>
           )}

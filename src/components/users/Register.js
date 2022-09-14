@@ -35,7 +35,8 @@ const Register = () => {
         setUsernameErrorMessage(null);
         setEmailErrorMessage(null);
         setPasswordErrorMessage(null);
-        navigate("/users/login");
+        navigate("/login");
+        console.log("registration successful");
       }
     } catch (e) {
       setUserCreated(false);
@@ -48,14 +49,14 @@ const Register = () => {
 
   return (
     <Container fluid className="registerContainer">
-      {userCreated && <div>User Created</div>}
-      {userCreated === false && <div>User registration unsuccessful</div>}
       <Row className="registerRow ">
         <Col className="registerLeft">Left</Col>
         <Col>
+          {userCreated && <div>User Created</div>}
+          {userCreated === false && <div>User registration unsuccessful</div>}
           <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3 formGroup">
-              <Form.Label>Username</Form.Label>
+              <Form.Label>Username *</Form.Label>
               <input
                 className="formControl"
                 type="text"
@@ -65,8 +66,9 @@ const Register = () => {
               />
               {usernameErrorMessage && <div>{usernameErrorMessage}</div>}
             </Form.Group>
+
             <Form.Group className="mb-3 formGroup">
-              <Form.Label>Display name</Form.Label>
+              <Form.Label>Display name *</Form.Label>
 
               <input
                 className="formControl"
@@ -77,8 +79,22 @@ const Register = () => {
               />
               {displaynameErrorMessage && <div>{displaynameErrorMessage}</div>}
             </Form.Group>
+
             <Form.Group className="mb-3 formGroup">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Email *</Form.Label>
+
+              <input
+                className="formControl"
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={onChange}
+              />
+              {emailErrorMessage && <div>{emailErrorMessage}</div>}
+            </Form.Group>
+
+            <Form.Group className="mb-3 formGroup">
+              <Form.Label>Password *</Form.Label>
 
               <input
                 className="formControl passwordForm"
@@ -95,19 +111,6 @@ const Register = () => {
                 onChange={onChange}
               />
               {passwordErrorMessage && <div>{passwordErrorMessage}</div>}
-            </Form.Group>
-
-            <Form.Group className="mb-3 formGroup">
-              <Form.Label>Email</Form.Label>
-
-              <input
-                className="formControl"
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={onChange}
-              />
-              {emailErrorMessage && <div>{emailErrorMessage}</div>}
             </Form.Group>
 
             <Form.Group className="mb-3 formGroup">
