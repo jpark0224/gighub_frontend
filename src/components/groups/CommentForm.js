@@ -9,7 +9,7 @@ import { API_URL } from "../../config.js";
 import Post from "./Post.js";
 import jwt_decode from "jwt-decode";
 
-const Comment = ({ id }) => {
+const Comment = ({ id, created_by }) => {
   // posts
   const [postData, setPostData] = useState([]);
 
@@ -81,7 +81,7 @@ const Comment = ({ id }) => {
             <Stack direction="horizontal" gap={3}>
               <Form.Label>
                 <img
-                  src="https://images.nightcafe.studio//assets/profile.png?tr=w-640,c-at_max"
+                  src={created_by.profile_picture}
                   alt="user_profile_picture"
                   className="createPostProfilePicture"
                 />

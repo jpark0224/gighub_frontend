@@ -38,7 +38,7 @@ const Comment = ({ contents, created_by, created_at, liked_user }) => {
         <Stack direction="vertical" gap={1}>
           <Stack direction="horizontal" gap={2}>
             <img
-              src="https://images.nightcafe.studio//assets/profile.png?tr=w-640,c-at_max"
+              src={created_by.profile_picture}
               alt="user_profile_picture"
               className="createCommentProfilePicture"
             />

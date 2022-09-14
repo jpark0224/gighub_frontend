@@ -19,6 +19,8 @@ const Post = ({
   comments_on_post,
   liked_user,
 }) => {
+  console.log(created_by.profile_picture);
+
   const [likeImage, setLikeImage] = useState(
     "https://www.svgrepo.com/show/220662/like.svg"
   );
@@ -49,7 +51,7 @@ const Post = ({
           <div className="postInfo">
             <Stack direction="horizontal" gap={2}>
               <img
-                src="https://images.nightcafe.studio//assets/profile.png?tr=w-640,c-at_max"
+                src={created_by.profile_picture}
                 alt="user_profile_picture"
                 className="createPostProfilePicture"
               />
@@ -87,7 +89,7 @@ const Post = ({
           </div>
           <Container className="commentFormContainer">
             <div className="commentForm">
-              <CommentForm id={id} />
+              <CommentForm id={id} created_by={created_by} />
             </div>
           </Container>
         </Stack>
