@@ -3,6 +3,7 @@ import axios from "axios";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 import Register from "./components/users/Register";
 import Login from "./components/users/Login";
+import Profile from "./components/users/Profile";
 import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Group from "./components/groups/Group";
@@ -29,6 +30,14 @@ function App() {
               setRefreshToken={setRefreshToken}
             />
           }
+        />
+        <Route
+          path="/profile"
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+          setAccessToken={setAccessToken}
+          setRefreshToken={setRefreshToken}
+          element={<Profile />}
         />
         <Route path="/groups/:groupID" element={<Group />} />
       </Routes>

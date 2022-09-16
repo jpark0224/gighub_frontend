@@ -103,3 +103,20 @@ label {
 .signInLink:hover {
   color: darken(#999, 13%);
 }
+
+.profilePictureContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.profilePictureInnerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.profilePicture {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}

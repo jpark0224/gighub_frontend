@@ -50,15 +50,24 @@ function NavBar({ accessToken, setAccessToken }) {
             <Nav>
               {accessToken ? (
                 <>
-                  <Button
-                    onClick={() => {
-                      localStorage.removeItem("access");
-                      setAccessToken(localStorage.access);
-                    }}
-                    variant="outline-dark"
-                  >
-                    Log Out
-                  </Button>
+                  <LinkContainer to="/profile">
+                    <Nav.Link>
+                      <Button variant="outline-dark">Profile</Button>
+                    </Nav.Link>
+                  </LinkContainer>
+                  <LinkContainer to="/">
+                    <Nav.Link>
+                      <Button
+                        onClick={() => {
+                          localStorage.removeItem("access");
+                          setAccessToken(localStorage.access);
+                        }}
+                        variant="outline-dark"
+                      >
+                        Log Out
+                      </Button>
+                    </Nav.Link>
+                  </LinkContainer>
                 </>
               ) : (
                 <>
