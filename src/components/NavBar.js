@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "../config.js";
 
 //https://react-bootstrap.netlify.app/components/navbar/
-function NavBar({ accessToken, setAccessToken }) {
+function NavBar({ accessToken, setAccessToken, setUserID }) {
   // const [storageToken,updateStorageToken] = useState(localStorage.token)
   const [groupData, setGroupData] = useState([]);
 
@@ -61,6 +61,8 @@ function NavBar({ accessToken, setAccessToken }) {
                         onClick={() => {
                           localStorage.removeItem("access");
                           setAccessToken(localStorage.access);
+                          localStorage.removeItem("userID");
+                          setUserID(localStorage.userID);
                         }}
                         variant="outline-dark"
                       >

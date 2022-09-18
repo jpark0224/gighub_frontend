@@ -5,8 +5,15 @@ import axios from "axios";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 import { Form, Button, Container } from "react-bootstrap";
+import jwt_decode from "jwt-decode";
 
-const Login = ({ accessToken, setAccessToken, setRefreshToken }) => {
+const Account = ({
+  accessToken,
+  setAccessToken,
+  setRefreshToken,
+  userID,
+  setUserID,
+}) => {
   const [formData, setFormData] = useState({});
   const [userLoggedIn, setUserLoggedIn] = useState(null);
   const [usernameErrorMessage, setUsernameErrorMessage] = useState(null);
@@ -31,8 +38,10 @@ const Login = ({ accessToken, setAccessToken, setRefreshToken }) => {
         console.log(process.env.NODE_ENV);
         localStorage.setItem("access", res.data.access);
         localStorage.setItem("refresh", res.data.refresh);
+        localStorage.setItem("userID", jwt_decode(res.data.access).user_id);
         setAccessToken(res.data.access);
         setRefreshToken(res.data.refresh);
+        setUserID(jwt_decode(res.data.access).user_id);
         setUserLoggedIn(true);
         navigate("/");
       }
@@ -101,4 +110,4 @@ const Login = ({ accessToken, setAccessToken, setRefreshToken }) => {
   );
 };
 
-export default Login;
+export default Account;
