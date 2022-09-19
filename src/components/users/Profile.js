@@ -12,6 +12,7 @@ const Profile = ({ accessToken, setAccessToken, setRefreshToken }) => {
   const [userData, setUserData] = useState(null);
   const [profilePicturePreview, setProfilePicturePreview] = useState(null);
   const [displayName, setDisplayName] = useState(null);
+  const [displayNameErrorMessage, setdisplayNameErrorMessage] = useState(null);
 
   let id = parseInt(localStorage.getItem("userID"));
   const headers = {
@@ -68,11 +69,14 @@ const Profile = ({ accessToken, setAccessToken, setRefreshToken }) => {
         }
       );
       console.log(res);
-      if (res.status === 201) {
+      if (res.status === 200) {
         setProfileUpdated(true);
+        setdisplayNameErrorMessage(null);
       }
     } catch (e) {
       setProfileUpdated(false);
+      setdisplayNameErrorMessage(e.response.data.display_name);
+      console.log(e.response);
     }
   };
 
@@ -102,6 +106,7 @@ const Profile = ({ accessToken, setAccessToken, setRefreshToken }) => {
                 onChange={onChange}
                 // value={displayName ? displayName : ""}
               />
+              {displayNameErrorMessage && <div>{displayNameErrorMessage}</div>}
             </Form.Group>
 
             <Form.Group
