@@ -41,13 +41,12 @@ body {
   }
 }
 
-.bandCardsContainer {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+.verticalCenter {
+  min-height: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
 }
 
 .bandProfilePicture,

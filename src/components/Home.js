@@ -18,28 +18,30 @@ const Home = () => {
   }, []);
 
   return (
-    <Container className="bandCardsContainer">
-      <Row md={4} className="g-4">
-        {groupData.map((group) => (
-          <Col md="auto" key={group.name}>
-            <Link to={`/groups/${group.id}`}>
-              <Card style={{ width: "15rem" }}>
-                <Card.Img
-                  className="cardImage"
-                  variant="top"
-                  src={`${group.profile_picture}`}
-                />
-                <Card.Body>
-                  <Card.Title className="cardGroupName">
-                    {group.name}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Link>
-          </Col>
-        ))}
-      </Row>
-    </Container>
+    <div className="verticalCenter">
+      <Container className="bandCardsContainer">
+        <Row xs={2} md={3} lg={4} className="g-4">
+          {groupData.map((group) => (
+            <Col lg={true} key={group.name}>
+              <Link to={`/groups/${group.id}`}>
+                <Card style={{ width: "15rem" }}>
+                  <Card.Img
+                    className="cardImage"
+                    variant="top"
+                    src={`${group.profile_picture}`}
+                  />
+                  <Card.Body>
+                    <Card.Title className="cardGroupName">
+                      {group.name}
+                    </Card.Title>
+                  </Card.Body>
+                </Card>
+              </Link>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    </div>
   );
 };
 
