@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import signUpLeft from "../../assets/sign-up-left.png";
 
 const Register = () => {
   const [formData, setFormData] = useState({});
@@ -90,7 +91,6 @@ const Register = () => {
   return (
     <Container fluid className="registerContainer">
       <Row className="registerRow ">
-        <Col className="registerLeft">Left</Col>
         <Col>
           {userCreated && <div>User Created</div>}
           {userCreated === false && <div>User registration unsuccessful</div>}

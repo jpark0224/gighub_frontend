@@ -229,3 +229,8 @@ footer {
   width: 30px;
   display: flex;
 }
+
+.signUpLeft {
+  width: inherit;
+  min-width: 10vw;
+}
